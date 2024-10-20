@@ -29,7 +29,8 @@ import EventsRoot from "./pages/EventsRoot";
 import Error from "./pages/Error";
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import {loader} from "./pages/EventsPage";
-import {action} from "./pages/NewEventPage";
+import {action as ManipulateEventAction} from "./pages/NewEventPage";
+import NewsletterPage,{action as newsletterAction} from "./pages/Newsletter";
 const router=createBrowserRouter([
   {path: "/",
     element: <Root/>,
@@ -49,13 +50,18 @@ const router=createBrowserRouter([
             loader:EventDetailsLoader,
             children:[
               { index:true, element: <EventDetailPage />, action:DeleteAction},
-              {path: "edit", element: <EditEventPage />},
+              {path: "edit", element: <EditEventPage />,action:ManipulateEventAction},
             ],
           },
         
-          {path: "new", element: <NewEventPage />, action:action},
+          {path: "new", element: <NewEventPage />, action:ManipulateEventAction},
         
         ]
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
       },
       
     ],
